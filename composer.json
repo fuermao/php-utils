@@ -1,0 +1,23 @@
+{
+    "name": "yckj/utils",
+    "description": "工具包",
+    "authors": [
+        {
+            "name": "ermao",
+            "email": "120191115@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "YiChUtils\\": "src/",
+            "YiChUtilsTest\\": "test/"
+        }
+
+    }
+}
