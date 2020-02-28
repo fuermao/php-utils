@@ -37,4 +37,39 @@ class ArrayUtils
 		}
 	}
 	
+	/**
+	 * 数组合并，支持多维数组操作
+	 * @param array $target 需要合并的目标数组
+	 * @param array $source 合并的数据源
+	 *
+	 * @return array
+	 */
+	public static function assignmentParams(array $target,array $source){
+		// 如果目标数组为空，则
+		if(empty($target)){
+			return $source;
+		}
+		// 如果数据源为空，则直接返回目标数组
+		elseif (empty($source)){
+			return $target;
+		}
+		// 两个数组都不为空的情况
+		else{
+			foreach ($source as $key=>$value){
+				// 如果数据源【键】在目标数据组存在
+				if(array_key_exists($key,$target)){
+					if(is_array($value) && !empty($value)){
+						$target[$key] = self::assignmentParams($target[$key],$value);
+					}
+					// 如果value是一个布尔类型
+					elseif (is_bool($value) || is_numeric($value) || (!empty($value) && $value != null)){
+						$target[$key] = $value;
+					}
+				}else{
+					$target[$key] = $value;
+				}
+			}
+			return $target;
+		}
+	}
 }
