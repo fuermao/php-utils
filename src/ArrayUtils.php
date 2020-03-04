@@ -4,6 +4,8 @@
 namespace YiChUtils;
 
 
+use YiChUtils\lib\ArraysToObject;
+
 class ArrayUtils
 {
 	/**
@@ -71,5 +73,17 @@ class ArrayUtils
 			}
 			return $target;
 		}
+	}
+	
+	/**
+	 * 数组转换为实例对象
+	 * @param string $namespace
+	 * @param array  $srcData
+	 *
+	 * @throws \ReflectionException
+	 * @return Object
+	 */
+	public static function arrayToObject(string $namespace,array $srcData){
+		return ArraysToObject::getInstance($namespace,$srcData)->exchangeToObject()->getClazz();
 	}
 }
