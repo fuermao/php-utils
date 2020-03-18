@@ -2,14 +2,16 @@
 
 namespace YiChUtilsTest;
 
-use YiChUtils\StringUtils;
 use PHPUnit\Framework\TestCase;
+use YiChUtils\StringUtils;
 
 class StringUtilsTest extends TestCase
 {
 	
 	public function testRandomString()
 	{
-		echo 11;
+		$this->assertTrue(is_string(StringUtils::randomString(2222)));
+		
+		$this->assertTrue(check_mobile('18981768499'));
 	}
 }

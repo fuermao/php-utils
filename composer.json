@@ -18,7 +18,11 @@
         "psr-4": {
             "YiChUtils\\": "src/",
             "YiChUtilsTest\\": "test/"
-        }
+        },
+        "files": [
+            "src/common_functions.php",
+            "src/validator_function.php"
+        ]
 
     }
 }

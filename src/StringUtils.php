@@ -62,4 +62,94 @@ class StringUtils
 		return $str;
 	}
 	
+	/**
+	 * 驼峰命名转下划线命名
+	 * @param string $camelCaps
+	 * @param string $separator
+	 *
+	 * @return string
+	 */
+	public static function uncamelize(string $camelCaps,string $separator='_'):string
+	{
+		return strtolower(preg_replace('/([a-z])([A-Z])/', "$1" . $separator . "$2", $camelCaps));
+	}
+	
+	/**
+	 * 字符串脱敏化处理
+	 * @param string $string        源字符串
+	 * @param int    $mosaicLen     脱敏化长度
+	 * @param string $type          脱敏方式，right 右侧填充脱敏字符表示；left 左侧填充脱敏字符表示，center 居中填充脱敏字符表示，
+	 * @param string $mosaic        脱敏字符
+	 *
+	 * @return string
+	 */
+	public static function mosaicString(string $string,int $mosaicLen = -1,string $type = "center",string $mosaic='*'):string {
+		$returnStr = "";
+		if(empty($string)){
+			return "";
+		}
+		// 脱敏字符串长度
+		$length = mb_strlen($string);
+		// 说明没传值，或所传值无效
+		if($mosaicLen < 0){
+			// 自动计算马赛克长度
+			switch ($length){
+				case 1:
+					$mosaicLen = 0;
+					break;
+				case 2:
+					$mosaicLen = 1;
+					break;
+				case 3:
+					$mosaicLen = 2;
+					break;
+				default:
+					// 说明未传参
+					$mosaicLen = ceil($length/3);
+					break;
+			}
+		}
+		// 自动计算截取字符串长度
+		$saveLen = (($length === 1 && $mosaicLen > 0 )|| $length <= $mosaicLen ) ? 0 : $length - $mosaicLen;
+		
+		// 如果保留字符串字符串长度为 ：0
+		if($saveLen == 0 || ($length === 1 && $saveLen > 0)){
+			return str_pad("",$length,$mosaic);
+		}
+		// 特殊情况 2：字符串长度等于2，且保留长度大于0；
+		if($length === 2 && $saveLen > 0){
+			$returnStr = "";
+			// 这种情况需要分做填充还是有填充
+			switch($type){
+				case "right":
+					$returnStr = mb_substr($string,0,$saveLen).str_pad("",$mosaicLen,$mosaic,STR_PAD_RIGHT);
+					break;
+				default:
+					$returnStr = str_pad("",$mosaicLen,$mosaic,STR_PAD_LEFT).mb_substr($string,-1,$saveLen);
+					break;
+			}
+			return $returnStr;
+		}
+		
+		switch($type){
+			case "right":
+				$returnStr = mb_substr($string,0,$length-$mosaicLen,"utf8").str_pad("",$mosaicLen,$mosaic);
+				break;
+			case "left":
+				$returnStr = str_pad("",$mosaicLen,$mosaic).mb_substr($string,$mosaicLen,$length - $mosaicLen,"utf8");
+				break;
+			// 默认居中填充
+			default:
+				$mid = ceil(($length -1 ) / 2);         // 中间索引位置
+				$offset = ceil( $mosaicLen / 2);        // 偏移长度
+				$leftLen = $length % 2 == 1 ? $mid - $offset + 1 : $mid - $offset ; // 左侧保留字符串
+				$len = $length - $leftLen - $mosaicLen;  // 剩余字符串长度
+				$rightIndex = $length % 2 == 1 ? $mid + ($mosaicLen - $offset) + 1 : $mid + ($mosaicLen - $offset) ;
+				$returnStr = mb_substr($string,0,$leftLen,"utf8").str_pad("",$mosaicLen,$mosaic).mb_substr($string,$rightIndex,$len,"utf8");
+				break;
+			
+		}
+		return $returnStr;
+	}
+	
 }
