@@ -13,5 +13,8 @@ class StringUtilsTest extends TestCase
 		$this->assertTrue(is_string(StringUtils::randomString(2222)));
 		
 		$this->assertTrue(check_mobile('18981768499'));
+		
+		
+		$this->assertTrue(user_name_mosaic("张三") == "张*","脱敏化失败");
 	}
 }
