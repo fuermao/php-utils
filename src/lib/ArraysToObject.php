@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace YiChUtils\lib;
+namespace ErMao\utils\lib;
 
 
 use ReflectionClass;
@@ -46,7 +46,7 @@ class ArraysToObject
 	/**
 	 * @var ArraysToObject ArraysToObject的实例信息
 	 */
-	private static ArraysToObject $instance;
+	private static $instance;
 	
 	/**
 	 * ArraysToObject constructor.

@@ -1,9 +1,14 @@
 <?php
 
+namespace ErMao\utils\constant;
 
-namespace YiChUtils;
 
-
+/**
+ * 常用请求头常量
+ * Class HttpHeader
+ *
+ * @package ErMao\utils\constant
+ */
 class HttpHeader
 {
     const ACCEPT = "Accept";

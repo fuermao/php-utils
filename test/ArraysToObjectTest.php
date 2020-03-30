@@ -1,9 +1,10 @@
 <?php
 
-namespace YiChUtilsTest;
+namespace ErMaoUtilsTest\utils;
 
+
+use ErMao\utils\lib\ArraysToObject;
 use PHPUnit\Framework\TestCase;
-use YiChUtils\lib\ArraysToObject;
 
 class ArraysToObjectTest extends TestCase
 {
@@ -23,24 +24,28 @@ class ArraysToObjectTest extends TestCase
 			"data"  => $arr
 		];
 		
-		$code = ArraysToObject::getInstance(ResponseEntity::class,$dataSrc)->exchangeToObject()->invokeMethod("getCode");
-		$msg = ArraysToObject::getInstance(ResponseEntity::class,$dataSrc)->exchangeToObject()->invokeMethod("getMsg");
-		$data = ArraysToObject::getInstance(ResponseEntity::class,$dataSrc)->exchangeToObject()->invokeMethod("getData");
+		$instance = ArraysToObject::getInstance(ResponseEntity::class,$dataSrc)->exchangeToObject();
 		
+		// 获取属性值
+		$code = $instance->invokeMethod("getCode");
+		$msg = $instance->invokeMethod("getMsg");
+		$data = $instance->invokeMethod("getData");
+		
+		print_r($data);
 		$this->assertEquals(200,$code,"获取code属性失败！");
 		$this->assertEquals("hello",$msg,"获取msg属性失败！");
-		print_r($data);
+		
 		$this->assertTrue($data == $arr,"获取data属性失败！");
 		
 	}
 }
 
 class ResponseEntity{
-	private int $code;
+	private $code;
 	
-	private string $msg;
+	private $msg;
 	
-	private array $data;
+	private $data;
 	
 	/**
 	 * ResponseEntity constructor.
@@ -51,9 +56,9 @@ class ResponseEntity{
 	 */
 	public function __construct(int $code, string $msg, array $data)
 	{
-		$this->code = $code;
-		$this->msg = $msg;
-		$this->data = $data;
+		$this->code = (int)$code;
+		$this->msg = (string)$msg;
+		$this->data = (array)$data;
 	}
 	
 	

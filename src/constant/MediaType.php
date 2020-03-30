@@ -1,9 +1,15 @@
 <?php
 
 
-namespace YiChUtils;
+namespace ErMao\utils\constant;
 
 
+/**
+ * 常用请求头或响应头 Content-Type 媒体类型
+ * Class MediaType
+ *
+ * @package ErMao\utils\constant
+ */
 class MediaType
 {
     const ALL_VALUE = "*/*";

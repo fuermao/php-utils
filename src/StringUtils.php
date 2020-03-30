@@ -1,5 +1,5 @@
 <?php
-namespace YiChUtils;
+namespace ErMao\utils;
 
 class StringUtils
 {
@@ -13,7 +13,7 @@ class StringUtils
 	 *
 	 * @return string
 	 */
-	public static function randomString($length,$isContainsLetter = true,$isContainsUpper=false,$isContainsSymbols=false) {
+	public static function randomString($length,$isContainsLetter = true,$isContainsUpper=false,$isContainsSymbols=false):string {
 		$numbers        = "123456789";
 		$lettersLower   = "qwertyuipasdfghjkzxcvbnm";
 		$lettersUpper   = "QWERTYUPASDFGHJKZXCVBNM";
@@ -152,4 +152,13 @@ class StringUtils
 		return $returnStr;
 	}
 	
+	/**
+	 * 身份证号码验证规则
+	 * @param string $idCard
+	 *
+	 * @return bool
+	 */
+	public static function checkIdCard(string $idCard):bool {
+	
+	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-use YiChUtils\StringUtils;
+use ErMao\utils\StringUtils;
 
 /**
  * 手机号脱敏处理

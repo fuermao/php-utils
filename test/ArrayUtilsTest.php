@@ -1,8 +1,8 @@
 <?php
 
-namespace Test;
+namespace ErMaoUtilsTest\utils;
 
-use YiChUtils\ArrayUtils;
+use ErMao\utils\ArrayUtils;
 use PHPUnit\Framework\TestCase;
 
 class ArrayUtilsTest extends TestCase

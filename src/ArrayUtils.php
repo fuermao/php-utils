@@ -1,10 +1,10 @@
 <?php
 
 
-namespace YiChUtils;
+namespace ErMao\utils;
 
 
-use YiChUtils\lib\ArraysToObject;
+use ErMao\utils\lib\ArraysToObject;
 
 class ArrayUtils
 {
